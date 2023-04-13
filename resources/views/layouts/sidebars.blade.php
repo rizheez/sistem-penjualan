@@ -57,25 +57,25 @@
                             <span>Produk</span>
                         </a>
                     </li>
+                    <li class="sidebar-item {{ request()->routeIs('supplier*') ? 'active' : '' }}">
+                        <a href="{{ route('supplier.index') }}" class="sidebar-link">
+                            <i class="bi bi-grid-fill"></i>
+                            <span>Supplier</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item {{ request()->routeIs('transaksi.index') ? 'active' : '' }}">
+                        <a href="{{ route('transaksi.index') }}" class="sidebar-link">
+                            <i class="bi bi-grid-fill"></i>
+                            <span>Transaksi</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item {{ request()->routeIs('produk-masuk*') ? 'active' : '' }}">
+                        <a href="{{ route('produk-masuk.index') }}" class="sidebar-link">
+                            <i class="bi bi-grid-fill"></i>
+                            <span>Produk Masuk</span>
+                        </a>
+                    </li>
                 @endif
-                <li class="sidebar-item {{ request()->routeIs('supplier*') ? 'active' : '' }}">
-                    <a href="{{ route('supplier.index') }}" class="sidebar-link">
-                        <i class="bi bi-grid-fill"></i>
-                        <span>Supplier</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ request()->routeIs('transaksi.index') ? 'active' : '' }}">
-                    <a href="{{ route('transaksi.index') }}" class="sidebar-link">
-                        <i class="bi bi-grid-fill"></i>
-                        <span>Transaksi</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ request()->routeIs('produk-masuk*') ? 'active' : '' }}">
-                    <a href="{{ route('produk-masuk.index') }}" class="sidebar-link">
-                        <i class="bi bi-grid-fill"></i>
-                        <span>Produk Masuk</span>
-                    </a>
-                </li>
                 <li class="sidebar-item">
                     <a href="index.html" class="sidebar-link">
                         <i class="bi bi-grid-fill"></i>
