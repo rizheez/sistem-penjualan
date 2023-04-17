@@ -30,7 +30,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">
-                        <h4 class="page-title text-uppercase ml-2">Data Peminjaman</h4>
+                        <h4 class="page-title text-uppercase ml-2">Data Produk</h4>
                         <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal"
                             data-bs-target="#modal-tambah">
                             Tambah Produk
