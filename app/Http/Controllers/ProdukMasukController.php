@@ -93,8 +93,12 @@ class ProdukMasukController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProdukMasuk $produkMasuk)
+    public function destroy($id)
     {
-        //
+        $produk = ProdukMasuk::find($id);
+
+        $produk->delete();
+
+        return redirect()->back()->with('success', 'Data Berhasil Dihapus');
     }
 }
