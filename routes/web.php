@@ -7,6 +7,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProdukMasukController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\TransaksiDetailController;
 
 /*
@@ -25,6 +26,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login')->name('login');
     Route::post('/logout', 'logout')->name('logout');
 });
+
+
 
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
@@ -48,12 +51,12 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->prefix('/admin')->gr
     Route::put('/produk-masuk/{id}', [ProdukMasukController::class, 'update'])->name('produk-masuk.update');
     Route::delete('/produk-masuk/{id}', [ProdukMasukController::class, 'destroy'])->name('produk-masuk.delete');
 
-    Route::get('/transaksi', [TransaksiDetailController::class, 'index'])->name('transaksi.index');
-    Route::get('/transaksi/create', [TransaksiDetailController::class, 'create'])->name('transaksi.create');
-    Route::post('/transaksi/create', [TransaksiDetailController::class, 'store'])->name('transaksi.store');
-    Route::get('/transaksi/{id}/edit', [TransaksiDetailController::class, 'edit'])->name('transaksi.edit');
-    Route::put('/transaksi/{id}', [TransaksiDetailController::class, 'update'])->name('transaksi.update');
-    Route::delete('/transaksi/{id}', [TransaksiDetailController::class, 'destroy'])->name('transaksi.delete');
+    Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
+    Route::get('/transaksi/create', [TransaksiController::class, 'create'])->name('transaksi.create');
+    Route::post('/transaksi/create', [TransaksiController::class, 'store'])->name('transaksi.store');
+    Route::get('/transaksi/{id}/edit', [TransaksiController::class, 'edit'])->name('transaksi.edit');
+    Route::put('/transaksi/{id}', [TransaksiController::class, 'update'])->name('transaksi.update');
+    Route::delete('/transaksi/{id}', [TransaksiController::class, 'destroy'])->name('transaksi.delete');
 
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
@@ -65,6 +68,9 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->prefix('/admin')->gr
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
+    Route::get('/kasir', [TransaksiDetailController::class, 'index'])->name('kasir.index');
+    Route::post('/kasir', [TransaksiDetailController::class, 'store'])->name('kasir.store');
 });
 
 Route::get('/', function () {

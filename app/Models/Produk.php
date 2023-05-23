@@ -46,4 +46,9 @@ class Produk extends Model
     {
         return $this->hasMany(ProdukMasuk::class);
     }
+
+    public function transaksi(): HasMany
+    {
+        return $this->hasMany(TransaksiDetail::class);
+    }
 }

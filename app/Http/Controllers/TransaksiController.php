@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\transaksi;
+use App\Models\TransaksiDetail;
 use Illuminate\Http\Request;
 
 class TransaksiController extends Controller
@@ -10,9 +11,19 @@ class TransaksiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $data = TransaksiDetail::with(['transaksi', 'produk'])->get();
+        if ($request->ajax()) {
+            return datatables()->of($data)
+                ->addIndexColumn()
+                // ->addColumn('aksi', function ($row) {
+                //     return view('admin.produk_masuk.aksi')->with('data', $row);
+                // })
+                ->make(true);
+        }
+        return view('admin.transaksi_detail', compact('data'));
     }
 
     /**

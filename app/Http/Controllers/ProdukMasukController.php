@@ -95,9 +95,14 @@ class ProdukMasukController extends Controller
      */
     public function destroy($id)
     {
-        $produk = ProdukMasuk::find($id);
+        $produkMasuk = ProdukMasuk::find($id);
 
-        $produk->delete();
+        // Mengurangi stok produk terkait
+        $produk = $produkMasuk->produk;
+        $produk->stok -= $produkMasuk->jumlah;
+        $produk->save();
+
+        $produkMasuk->delete();
 
         return redirect()->back()->with('success', 'Data Berhasil Dihapus');
     }

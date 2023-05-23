@@ -82,7 +82,9 @@
                                     </div>
                                     <div class="col-md-12">
                                         <label for="tangal_masuk" class="form-label">Tanggal Masuk</label>
-                                        <input type="date" class="form-control" id="tangal_masuk" name="tangal_masuk">
+                                        {{-- <input type="date" class="form-control" id="tangal_masuk" name="tangal_masuk"> --}}
+                                        <input type="date" class="form-control mb-3 flatpickr-no-config"
+                                            placeholder="Select date.." id="tangal_masuk" name="tangal_masuk" />
                                     </div>
                                     <div class="col-md-12">
                                         <label for="jumlah" class="form-label">Jumlah</label>
@@ -126,6 +128,14 @@
 @endsection
 
 @push('script')
+    <script src="{{ asset('assets/extensions/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{ asset('assets/static/js/pages/date-picker.js') }}"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/id.js"></script>
+    <script>
+        flatpickr('.flatpickr-no-config', {
+            "locale": "id" // locale for this instance only
+        });
+    </script>
     <script>
         $(document).ready(function() {
             const table = $('#table-produk-masuk').DataTable({

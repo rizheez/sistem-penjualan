@@ -4,13 +4,7 @@
     <div class="page-heading">
         <div class="page-title">
             <div class="row">
-                <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>DataTable jQuery</h3>
-                    <p class="text-subtitle text-muted">
-                        Powerful interactive tables with datatables (jQuery required).
-                    </p>
-                </div>
-                <div class="col-12 col-md-6 order-md-2 order-first">
+                <div class="col order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
@@ -30,11 +24,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">
-                        <h4 class="page-title text-uppercase ml-2">Data Supplier</h4>
-                        <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal"
-                            data-bs-target="#supplierModal">
-                            Tambah Supplier
-                        </button>
+                        <h4 class="page-title text-uppercase ml-2">Data Transaksi Penjualan</h4>
                     </div>
                 </div>
                 <!-- Modal -->
@@ -116,7 +106,7 @@
                                     <th>Produk</th>
                                     <th>Jumlah</th>
                                     <th>Total Harga</th>
-                                    <th>Aksi</th>
+                                    {{-- <th>Aksi</th> --}}
                                 </tr>
                             </thead>
                         </table>
@@ -166,12 +156,12 @@
                         data: 'total_harga',
                         name: 'total_harga'
                     },
-                    {
-                        data: 'aksi',
-                        name: 'aksi',
-                        orderable: false,
-                        searchable: false,
-                    },
+                    // {
+                    //     data: 'aksi',
+                    //     name: 'aksi',
+                    //     orderable: false,
+                    //     searchable: false,
+                    // },
                 ]
             });
         });

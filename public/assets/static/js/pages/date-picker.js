@@ -1,17 +1,17 @@
 
+flatpickr.localize(flatpickr.l10ns.id);
 flatpickr('.flatpickr-no-config', {
-    enableTime: true,
-    dateFormat: "Y-m-d H:i", 
+    dateFormat: "Y-m-d",
 })
 flatpickr('.flatpickr-always-open', {
     inline: true
 })
 flatpickr('.flatpickr-range', {
-    dateFormat: "F j, Y", 
+    dateFormat: "F j, Y",
     mode: 'range'
 })
 flatpickr('.flatpickr-range-preloaded', {
-    dateFormat: "F j, Y", 
+    dateFormat: "F j, Y",
     mode: 'range',
     defaultDate: ["2016-10-10T00:00:00Z", "2016-10-20T00:00:00Z"]
 })
