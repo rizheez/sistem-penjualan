@@ -31,29 +31,25 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
-    Route::get('/produk/create', [ProdukController::class, 'create'])->name('produk.create');
-    Route::post('/produk/create', [ProdukController::class, 'store'])->name('produk.store');
+    Route::post('/produk', [ProdukController::class, 'store'])->name('produk.store');
     Route::get('/produk/{id}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
     Route::put('/produk/{id}', [ProdukController::class, 'update'])->name('produk.update');
     Route::delete('/produk/{id}', [ProdukController::class, 'destroy'])->name('produk.delete');
 
     Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier.index');
-    Route::get('/supplier/create', [SupplierController::class, 'create'])->name('supplier.create');
-    Route::post('/supplier/create', [SupplierController::class, 'store'])->name('supplier.store');
+    Route::post('/supplier', [SupplierController::class, 'store'])->name('supplier.store');
     Route::get('/supplier/{id}/edit', [SupplierController::class, 'edit'])->name('supplier.edit');
     Route::put('/supplier/{id}', [SupplierController::class, 'update'])->name('supplier.update');
     Route::delete('/supplier/{id}', [SupplierController::class, 'destroy'])->name('supplier.delete');
 
     Route::get('/produk-masuk', [ProdukMasukController::class, 'index'])->name('produk-masuk.index');
-    Route::get('/produk-masuk/create', [ProdukMasukController::class, 'create'])->name('produk-masuk.create');
-    Route::post('/produk-masuk/create', [ProdukMasukController::class, 'store'])->name('produk-masuk.store');
+    Route::post('/produk-masuk', [ProdukMasukController::class, 'store'])->name('produk-masuk.store');
     Route::get('/produk-masuk/{id}/edit', [ProdukMasukController::class, 'edit'])->name('produk-masuk.edit');
     Route::put('/produk-masuk/{id}', [ProdukMasukController::class, 'update'])->name('produk-masuk.update');
     Route::delete('/produk-masuk/{id}', [ProdukMasukController::class, 'destroy'])->name('produk-masuk.delete');
 
     Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
-    Route::get('/transaksi/create', [TransaksiController::class, 'create'])->name('transaksi.create');
-    Route::post('/transaksi/create', [TransaksiController::class, 'store'])->name('transaksi.store');
+    Route::post('/transaksi', [TransaksiController::class, 'store'])->name('transaksi.store');
     Route::get('/transaksi/{id}/edit', [TransaksiController::class, 'edit'])->name('transaksi.edit');
     Route::put('/transaksi/{id}', [TransaksiController::class, 'update'])->name('transaksi.update');
     Route::delete('/transaksi/{id}', [TransaksiController::class, 'destroy'])->name('transaksi.delete');
