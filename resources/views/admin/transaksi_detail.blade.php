@@ -142,7 +142,11 @@
                     },
                     {
                         data: 'transaksi.tanggal_transaksi',
-                        name: 'transaksi.tanggal_transaksi'
+                        name: 'transaksi.tanggal_transaksi',
+                        render: function(data) {
+                            moment.locale('id');
+                            return moment(data).format("LL");
+                        }
                     },
                     {
                         data: 'produk.nama',

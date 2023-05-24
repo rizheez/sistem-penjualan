@@ -64,7 +64,10 @@ class TransaksiDetailController extends Controller
             $transaksiDetail = new TransaksiDetail();
             $produk = Produk::find($item['produk_id']);
             if ($produk->stok <= 0) {
-                return response()->json(['message' => 'stok habis'], 422);
+                return response()->json(['message' => 'stok ' . $produk->nama . ' habis'], 422);
+            }
+            if ($produk->stok < $item['jumlah']) {
+                return response()->json(['message' => 'Jumlah pembelian ' . $produk->nama .  ' melebihi stok produk'], 422);
             }
             $transaksiDetail->transaksi_id = $transaksi->id;
             $transaksiDetail->produk_id = $item['produk_id'];
