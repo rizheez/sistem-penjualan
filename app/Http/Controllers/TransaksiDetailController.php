@@ -50,15 +50,22 @@ class TransaksiDetailController extends Controller
             'tableData.*.total_harga' => 'required|numeric|min:0',
         ]);
 
+
         // Simpan data transaksi ke dalam tabel transaksi
         $transaksi = new Transaksi();
         $transaksi->tanggal_transaksi = Carbon::now();
         $transaksi->save();
 
+
+
         // Simpan data transaksi_detail ke dalam tabel transaksi_detail
         $items = $request->input('tableData');
         foreach ($items as $item) {
             $transaksiDetail = new TransaksiDetail();
+            $produk = Produk::find($item['produk_id']);
+            if ($produk->stok <= 0) {
+                return response()->json(['message' => 'stok habis'], 422);
+            }
             $transaksiDetail->transaksi_id = $transaksi->id;
             $transaksiDetail->produk_id = $item['produk_id'];
             $transaksiDetail->jumlah = $item['jumlah'];
@@ -68,7 +75,6 @@ class TransaksiDetailController extends Controller
             $transaksiDetail->save();
 
             // Mengurangi stok produk terkait
-            $produk = Produk::find($item['produk_id']);
             $produk->stok -= $item['jumlah'];
             $produk->save();
         }

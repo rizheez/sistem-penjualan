@@ -169,7 +169,8 @@
                     dataType: 'json',
                     success: function(response) {
                         $('#supplier-tambah')[0].reset();
-                        swal("Success", "Data Is Successfully saved", "success").then(
+                        var successMessage = response.message;
+                        swal("Success", successMessage, "success").then(
                             () => {
                                 $('#supplierModal').modal('hide'); // Menutup modal
                                 $('.is-invalid').removeClass('is-invalid');

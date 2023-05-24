@@ -221,8 +221,8 @@
                     success: function(response) {
                         $('#form-tambah')[0].reset();
 
-
-                        swal("Success", "Data Is Successfully saved", "success").then(
+                        var successMessage = response.message;
+                        swal("Success", successMessage, "success").then(
                             () => {
                                 $('#modal-tambah').modal('hide'); // Menutup modal
                                 $('.is-invalid').removeClass('is-invalid');
@@ -270,7 +270,8 @@
                     success: function(response) {
                         // $('#modal-edit').modal('hide');
                         // location.reload();
-                        swal("Success", "Data Is Successfully saved", "success").then(() => {
+                        var successMessage = response.message;
+                        swal("Success", successMessage, "success").then(() => {
                             $('#modal-edit').modal('hide');
                             $('.is-invalid').removeClass('is-invalid');
                             $('.invalid-feedback').remove();
@@ -290,7 +291,7 @@
                             var errorHtml = '<div class="invalid-feedback">' + value +
                                 '</div>';
                             $('#edit_' + key).addClass('is-invalid').after(errorHtml);
-                            console.log(key)
+
                         });
                     }
                 });

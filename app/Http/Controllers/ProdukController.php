@@ -55,7 +55,7 @@ class ProdukController extends Controller
         $produk->stok = 0;
         $produk->save();
 
-        return response()->json(['success' => true]);
+        return response()->json(['message' => 'Data Berhasil Disimpan']);
     }
 
     /**
@@ -99,7 +99,7 @@ class ProdukController extends Controller
         $produk->stok = 0;
         $produk->save();
 
-        return response()->json(['success' => true]);
+        return response()->json(['message' => 'Data Berhasil Diubah']);
     }
 
     /**

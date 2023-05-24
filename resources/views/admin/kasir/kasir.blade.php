@@ -21,13 +21,16 @@
                 <!-- Input produk dan jumlah -->
                 <div class="mb-3">
                     <label for="produk_id" class="form-label">Produk:</label>
-                    <select class="form-select" id="produk_id" name="produk_id">
-                        <!-- Opsi produk yang dapat dipilih -->
-                        <!-- Jika Anda ingin mengambil opsi produk dari database, Anda dapat menggunakan foreach di sini -->
-                        @foreach ($produk as $product)
-                            <option value="{{ $product->id }}">{{ $product->nama }}</option>
-                        @endforeach
-                    </select>
+                    <div class="dropdown">
+                        <select class="selectpicker" id="produk_id" name="produk_id" data-live-search="true"
+                            data-width="100%" data-size="3">
+                            <!-- Opsi produk yang dapat dipilih -->
+                            <!-- Jika Anda ingin mengambil opsi produk dari database, Anda dapat menggunakan foreach di sini -->
+                            @foreach ($produk as $product)
+                                <option value="{{ $product->id }}">{{ $product->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
 
                 <div class="mb-3">
@@ -163,14 +166,18 @@
                     },
                     success: function(response) {
                         // Tindakan yang dilakukan setelah berhasil mengirim data ke server
-                        console.log(response);
                         // Reset atau hapus data di tabel
                         $('#tabel-produk').empty();
                         // Reset total harga
                         $('#total-harga').text('Total Harga: Rp 0');
+                        var successMessage = response.message;
+                        swal("Success", successMessage, "success")
+
                     },
                     error: function(xhr, status, error) {
                         // Tindakan yang dilakukan jika terjadi kesalahan saat mengirim data
+                        var errorMessage = xhr.responseJSON.message;
+                        swal("Error", errorMessage, "error");
                         console.error(error);
                     }
                 });

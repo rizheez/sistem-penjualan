@@ -47,7 +47,7 @@ class SupplierController extends Controller
         $supplier->no_telepon = $request->no_telepon;
         $supplier->save();
 
-        return response()->json(['success' => true]);
+        return response()->json(['message' => 'Data Berhasil Disimpan']);
     }
 
     /**
@@ -85,7 +85,7 @@ class SupplierController extends Controller
         $supplier->no_telepon = $request->no_telepon;
         $supplier->save();
 
-        return response()->json(['success' => true]);
+        return response()->json(['message' => 'Data Berhasil Diubah']);
     }
 
     /**

@@ -63,7 +63,7 @@ class ProdukMasukController extends Controller
         $produk->save();
         $produkMasuk->save();
 
-        return response()->json(['success' => true]);
+        return response()->json(['message' => 'Data Berhasil Disimpan']);
     }
 
     /**
