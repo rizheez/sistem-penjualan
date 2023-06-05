@@ -21,4 +21,9 @@ class TransaksiDetail extends Model
     {
         return $this->belongsTo(Produk::class);
     }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -172,6 +172,7 @@
                         $('#total-harga').text('Total Harga: Rp 0');
                         var successMessage = response.message;
                         swal("Success", successMessage, "success")
+                        console.log(tableData);
 
                     },
                     error: function(xhr, status, error) {

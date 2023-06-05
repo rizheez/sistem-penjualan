@@ -196,9 +196,7 @@
                 optionsPendapatan
             )
 
-            // var chart = new ApexCharts(document.querySelector("#chart-profit-monthly"), options);
-            console.log({!! json_encode(array_column($chartData, 'bulan')) !!})
-            console.log({!! json_encode(array_column($chartData, 'pendapatan')) !!})
+
             chart.render();
 
         });

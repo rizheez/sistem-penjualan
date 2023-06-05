@@ -8,10 +8,10 @@
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="index.html">Dashboard</a>
+                                <a href="{{ route('dashboard.index') }}">Dashboard</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">
-                                DataTable jQuery
+                                Data Transaksi
                             </li>
                         </ol>
                     </nav>
@@ -106,6 +106,7 @@
                                     <th>Produk</th>
                                     <th>Jumlah</th>
                                     <th>Total Harga</th>
+                                    <th>Kasir</th>
                                     {{-- <th>Aksi</th> --}}
                                 </tr>
                             </thead>
@@ -160,6 +161,11 @@
                         data: 'total_harga',
                         name: 'total_harga'
                     },
+                    {
+                        data: 'users.name',
+                        name: 'users.name'
+                    },
+
                     // {
                     //     data: 'aksi',
                     //     name: 'aksi',

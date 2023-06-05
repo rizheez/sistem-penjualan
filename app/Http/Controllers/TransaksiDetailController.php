@@ -7,6 +7,7 @@ use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\TransaksiDetail;
+use Illuminate\Support\Facades\Auth;
 
 class TransaksiDetailController extends Controller
 {
@@ -43,6 +44,8 @@ class TransaksiDetailController extends Controller
     {
         //
         // Validasi inputan jika diperlukan
+        $items = $request->input('tableData');
+
         $request->validate([
             'tableData' => 'required|array',
             'tableData.*.produk_id' => 'required|exists:produk,id',
@@ -59,7 +62,6 @@ class TransaksiDetailController extends Controller
 
 
         // Simpan data transaksi_detail ke dalam tabel transaksi_detail
-        $items = $request->input('tableData');
         foreach ($items as $item) {
             $transaksiDetail = new TransaksiDetail();
             $produk = Produk::find($item['produk_id']);
@@ -75,6 +77,7 @@ class TransaksiDetailController extends Controller
             // Jika harga produk disimpan di tabel transaksi_detail, Anda juga perlu mengambil harganya dari database
             // dan mengatur nilai price di sini.
             $transaksiDetail->total_harga = $item['total_harga'];
+            $transaksiDetail->users_id = Auth::user()->id;
             $transaksiDetail->save();
 
             // Mengurangi stok produk terkait

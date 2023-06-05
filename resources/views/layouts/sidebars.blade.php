@@ -46,13 +46,13 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
+                <li class="sidebar-item {{ request()->routeIs('dashboard*') ? 'active' : '' }} ">
+                    <a href="{{ route('dashboard.index') }}" class="sidebar-link">
+                        <i class="bi bi-grid-fill"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
                 @if (Auth::user()->roles === 'admin')
-                    <li class="sidebar-item {{ request()->routeIs('dashboard*') ? 'active' : '' }} ">
-                        <a href="{{ route('dashboard.index') }}" class="sidebar-link">
-                            <i class="bi bi-grid-fill"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
                     <li class="sidebar-item {{ request()->routeIs('produk.index') ? 'active' : '' }}">
                         <a href="{{ route('produk.index') }}" class="sidebar-link">
                             <i class="bi bi-grid-fill"></i>

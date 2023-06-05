@@ -14,7 +14,7 @@ class TransaksiController extends Controller
     public function index(Request $request)
     {
         //
-        $data = TransaksiDetail::with(['transaksi', 'produk'])->get();
+        $data = TransaksiDetail::with(['transaksi', 'produk', 'users'])->get();
         if ($request->ajax()) {
             return datatables()->of($data)
                 ->addIndexColumn()

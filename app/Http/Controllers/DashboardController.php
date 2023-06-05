@@ -19,7 +19,8 @@ class DashboardController extends Controller
         $produkCount = Produk::count();
         $supplierCount = Supplier::count();
 
-        $hariSekarang = Carbon::today();
+        $hariSekarang = Carbon::now()->setTimezone('Asia/Makassar');
+
 
         $pendapatanHari = Transaksi::join('transaksi_detail', 'transaksi.id', '=', 'transaksi_detail.transaksi_id')
             ->whereDay('transaksi.tanggal_transaksi', $hariSekarang)
@@ -39,11 +40,14 @@ class DashboardController extends Controller
         $chartData = $this->generateChartData($revenueData);
 
         $topProducts = TransaksiDetail::join('produk', 'transaksi_detail.produk_id', '=', 'produk.id')
+            ->join('transaksi', 'transaksi_detail.transaksi_id', '=', 'transaksi.id')
             ->select('produk.nama', DB::raw('SUM(jumlah) as total_pembelian'))
             ->groupBy('transaksi_detail.produk_id', 'produk.nama')
             ->orderByDesc('total_pembelian')
             ->limit(5)
             ->get();
+
+
 
         return view('admin.dashboard', compact('produkCount', 'supplierCount', 'pendapatanBulan', 'pendapatanHari', 'chartData', 'topProducts'));
     }
