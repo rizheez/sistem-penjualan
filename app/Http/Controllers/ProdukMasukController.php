@@ -15,7 +15,7 @@ class ProdukMasukController extends Controller
     public function index(Request $request)
     {
         $data = ProdukMasuk::with(['produk', 'supplier'])->get();
-        $produk = Produk::all(['id', 'nama']);
+        $produk = Produk::all();
         $supplier = Supplier::all(['id', 'nama']);
         if ($request->ajax()) {
             return datatables()->of($data)
@@ -46,6 +46,7 @@ class ProdukMasukController extends Controller
             'produk_id' => 'required',
             'supplier_id' => 'required',
             'tangal_masuk' => 'required',
+            'harga_beli' => 'required',
             'jumlah' => 'required',
         ]);
 
@@ -59,6 +60,7 @@ class ProdukMasukController extends Controller
 
 
         $produk = Produk::find($produkMasuk->produk_id);
+        $produk->harga_beli = $request->harga_beli;
         $produk->stok += $produkMasuk->jumlah;
         $produk->save();
         $produkMasuk->save();
@@ -77,17 +79,46 @@ class ProdukMasukController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProdukMasuk $produkMasuk)
+    public function edit($id)
     {
-        //
+        $produkMasuk = ProdukMasuk::find($id);
+        $produk = $produkMasuk->produk;
+        $supplier = Supplier::all(['id', 'nama']);
+
+        return response()->json([
+            'produkMasuk' => $produkMasuk,
+            'produk' => $produk,
+            'supplier' => $supplier
+        ]);
     }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProdukMasuk $produkMasuk)
+    public function update(Request $request, $id)
     {
         //
+        $produkMasuk = ProdukMasuk::find($id);
+        $request->validate([
+            'produk_id' => 'required',
+            'supplier_id' => 'required',
+            'tangal_masuk' => 'required',
+            'harga_beli' => 'required',
+
+        ]);
+
+        $produkMasuk->produk_id = $request->produk_id;
+        $produkMasuk->supplier_id = $request->supplier_id;
+        $produkMasuk->tangal_masuk = $request->tangal_masuk;
+
+
+        $produk = Produk::find($produkMasuk->produk_id);
+        $produk->harga_beli = $request->harga_beli;
+        $produk->save();
+        $produkMasuk->save();
+
+        return response()->json(['message' => 'Data Berhasil Diubah']);
     }
 
     /**

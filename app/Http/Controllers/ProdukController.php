@@ -42,7 +42,6 @@ class ProdukController extends Controller
         $request->validate([
             'nama' => 'required|string|max:100',
             'kategori' => 'required|string|max:255',
-            'harga_beli' => 'required',
             'harga_jual' => 'required',
 
         ]);
@@ -50,7 +49,6 @@ class ProdukController extends Controller
         $produk = new Produk();
         $produk->nama = $request->nama;
         $produk->kategori = $request->kategori;
-        $produk->harga_beli = $request->harga_beli;
         $produk->harga_jual = $request->harga_jual;
         $produk->stok = 0;
         $produk->save();
@@ -94,7 +92,6 @@ class ProdukController extends Controller
 
         $produk->nama = $request->nama;
         $produk->kategori = $request->kategori;
-        $produk->harga_beli = $request->harga_beli;
         $produk->harga_jual = $request->harga_jual;
         $produk->stok = 0;
         $produk->save();

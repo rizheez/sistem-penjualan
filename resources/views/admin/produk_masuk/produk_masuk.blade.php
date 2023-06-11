@@ -78,7 +78,12 @@
                                         <input type="date" class="form-control mb-3 flatpickr-no-config"
                                             placeholder="Select date.." id="tangal_masuk" name="tangal_masuk" />
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-6">
+                                        <label for="harga_beli" class="form-label">Harga Beli</label>
+                                        <input type="number" class="form-control" id="harga_beli" name="harga_beli"
+                                            min="0">
+                                    </div>
+                                    <div class="col-md-6">
                                         <label for="jumlah" class="form-label">Jumlah</label>
                                         <input type="number" class="form-control" id="jumlah" name="jumlah"
                                             min="0">
@@ -96,6 +101,79 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="modal fade" id="modal-edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="row g-3" id="form-edit">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" name="id" id="mmid">
+                                    <div class="col-md-12">
+                                        <label for="produk_id" class="form-label">Nama Produk</label>
+                                        <div class="dropdown">
+                                            <select class="selectpicker" aria-label="Default select example"
+                                                data-live-search="true" data-width="100%" name="produk_id"
+                                                id="produk_id" title="Pilih Produk" data-size="3">
+                                                {{-- <option disabled selected>Open this select menu</option> --}}
+                                                @foreach ($produk as $p)
+                                                    <option value="{{ $p->id }}"
+                                                        {{ $p->id === $data->pluck('produk_id')->first() ? 'selected' : '' }}>
+                                                        {{ $p->nama }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="supplier_id" class="form-label">Nama Supplier</label>
+                                        <div class="dropdown">
+                                            <select class="selectpicker" aria-label="Default select example"
+                                                data-live-search="true" data-width="100%" name="supplier_id"
+                                                id="supplier_id" title="Pilih Supplier" data-size="3">
+                                                {{-- <option disabled selected>Open this select menu</option> --}}
+                                                @foreach ($supplier as $s)
+                                                    <option
+                                                        value="{{ $s->id }}"{{ $s->id === $data->pluck('supplier_id')->first() ? 'selected' : '' }}
+                                                        {{ $s->id === $data->pluck('supplier_id')->first() ? 'selected' : '' }}>
+                                                        {{ $s->nama }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="tangal_masuk" class="form-label">Tanggal Masuk</label>
+                                        {{-- <input type="date" class="form-control" id="tangal_masuk" name="tangal_masuk"> --}}
+                                        <input type="date" class="form-control flatpickr-no-config"
+                                            placeholder="Select date.." id="editTanggalMasuk" name="tangal_masuk" />
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="harga_beli" class="form-label">Harga Beli</label>
+                                        <input type="number" class="form-control" id="editHargaBeli" name="harga_beli"
+                                            min="0">
+                                    </div>
+
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Tutup</button>
+                                        <button type="submit" class="btn btn-primary">Tambah</button>
+
+                                    </div>
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table" id="table-produk-masuk">
@@ -217,14 +295,14 @@
                 var form = $(this);
                 var id = $('#mmid').val();
                 $.ajax({
-                    url: "/admin/supplier/" + id,
+                    url: "/admin/produk-masuk/" + id,
                     type: 'PUT',
                     data: form.serialize(),
                     success: function(response) {
                         // $('#modal-edit').modal('hide');
                         // location.reload();
                         swal("Success", "Data Is Successfully saved", "success").then(() => {
-                            $('#modalEditSupplier').modal('hide');
+                            $('#modal-edit').modal('hide');
                             $('.is-invalid').removeClass('is-invalid');
                             $('.invalid-feedback').remove();
                             $('#table-produk-masuk').DataTable().ajax
@@ -283,18 +361,17 @@
 
             $(document).on('click', '.edit', function() {
                 var id = $(this).data('id');
-                $('#modalEditSupplier').modal('show');
-                $('#supplier-edit').attr('action', '/admin/supplier/' + id);
+                $('#modal-edit').modal('show');
+                $('#form-edit').attr('action', '/admin/produk-masuk/' + id);
                 $.ajax({
-                    url: '/admin/supplier/' + id + '/edit',
+                    url: '/admin/produk-masuk/' + id + '/edit',
                     type: 'GET',
                     dataType: 'json',
                     success: function(response) {
 
-                        $('#edit_nama').val(response.supplier.nama);
-                        $('#edit_kategori').val(response.supplier.kategori);
-                        $('#edit_harga_beli').val(response.supplier.harga_beli);
-                        $('#edit_harga_jual').val(response.supplier.harga_jual);
+
+                        $('#editTanggalMasuk').val(response.produkMasuk.tangal_masuk);
+                        $('#editHargaBeli').val(response.produk.harga_beli);
                         $('#mmid').val(id)
 
                         // tambahkan kode untuk mengisi nilai form dengan data yang diambil dari database

@@ -52,11 +52,7 @@
                                         <label for="kategori" class="form-label">Kategori</label>
                                         <input type="text" class="form-control" id="kategori" name="kategori">
                                     </div>
-                                    <div class="col-6">
-                                        <label for="harga_beli" class="form-label">Harga Beli</label>
-                                        <input type="number" class="form-control" id="harga_beli" name="harga_beli"
-                                            min="0">
-                                    </div>
+
                                     <div class="col-6">
                                         <label for="harga_jual" class="form-label">Harga Jual</label>
                                         <input type="number" class="form-control" id="harga_jual" name="harga_jual"
