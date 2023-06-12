@@ -84,13 +84,15 @@
                         <span>Kasir</span>
                     </a>
                 </li>
-                <li class="sidebar-title">Manajemen User</li>
-                <li class="sidebar-item {{ request()->routeIs('user*') ? 'active' : '' }}">
-                    <a href="{{ route('user.index') }}" class="sidebar-link">
-                        <i class="bi bi-grid-fill"></i>
-                        <span>User</span>
-                    </a>
-                </li>
+                @if (Auth::user()->roles === 'admin')
+                    <li class="sidebar-title">Manajemen User</li>
+                    <li class="sidebar-item {{ request()->routeIs('user*') ? 'active' : '' }}">
+                        <a href="{{ route('user.index') }}" class="sidebar-link">
+                            <i class="bi bi-grid-fill"></i>
+                            <span>User</span>
+                        </a>
+                    </li>
+                @endif
 
 
 

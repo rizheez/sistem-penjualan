@@ -56,7 +56,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->prefix('/admin')->gr
 
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
-    Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
+    Route::post('/user', [UserController::class, 'store'])->name('user.store');
     Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
     Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.delete');
@@ -67,6 +67,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/kasir', [TransaksiDetailController::class, 'index'])->name('kasir.index');
     Route::post('/kasir', [TransaksiDetailController::class, 'store'])->name('kasir.store');
+    Route::get('/settings/edit/{id}', [UserController::class, 'settings'])->name('user.settings');
+    Route::put('/settings/edit/{id}', [UserController::class, 'updateUser'])->name('user.updated');
 });
 
 Route::get('/', function () {
